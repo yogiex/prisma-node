@@ -1,0 +1,25 @@
+<%- include('./layouts/topDashboard'); %>
+
+<a href="product/tambah">
+    <i class="fas fa-plus-square fa-2x d-flex justify-content-end">  </i>
+</a>
+
+<table class="table table-dark">
+    <thead>
+        <th>nama</th>
+        <th>harga</th>
+        <th>category</th>
+        <th>Deskripsi</th>
+    </thead>
+    <% for(let i=0;i<products.length;i++) { %>
+        <tr>
+            <td><%= products[i].title %></td>
+            <td><%= products[i].price %></td>
+            <td><%= products[i].category.name %></td>
+            <td><%= products[i].description %></td>
+        </tr>
+    <% } %>
+</table>
+
+
+<%- include('./layouts/footerDashboard') %>

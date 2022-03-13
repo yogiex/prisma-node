@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["selectRelationCount"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(uuid())
+  name     String  @unique
+  email    String  @unique
+  password String
+  role     Role    @default(USER)
+  order    Order[]
+}
+
+enum Role {
+  USER
+  ADMIN
+  PELAYAN
+  KOKI
+}
+
+model Food {
+  id          String        @id @default(uuid())
+  title       String
+  description String
+  price       Decimal
+  image       String
+  category    Category      @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  orders      FoodInOrder[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  foods Food[]
+}
+
+model Order {
+  id          String        @id @default(uuid())
+  foods       String
+  price       Decimal
+  dateOrder   DateTime      @default(now())
+  discount    Int           @default(0)
+  pemesan     String
+  pelayan     User          @relation(fields: [pelayanId], references: [id])
+  pelayanId   String        
+  status      OrderStatus    @default(WAITING)
+  foodsDetail FoodInOrder[]
+  payment Payment?
+}
+
+model FoodInOrder {
+  food Food @relation(fields: [foodId],references:[id])
+  foodId String
+  order Order @relation(fields: [orderId], references:[id])
+  orderId String
+  @@id([foodId, orderId])
+}
+enum OrderStatus {
+  WAITING
+  PROCCESS
+  PAID
+}
+
+model Payment {
+  id Int @id @default(autoincrement())
+  order Order @relation(fields: [orderId],references:[id])
+  orderId String
+  pembayaran Decimal
+  kembalian Decimal
+  income Decimal
+}

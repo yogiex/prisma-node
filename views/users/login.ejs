@@ -1,0 +1,42 @@
+<%- include('../templates/head') %> 
+<style>
+    form {
+        max-width: 480px;
+        margin: auto;
+    }
+</style>
+<div class="text-center mt-5">
+    <h3>user login</h3>
+    <i class="fas fa-user"></i>
+
+<div class="register">
+    <form action="/users/login" method="post">
+
+        <div>
+            <label for="">email</label>
+            <input class="form-control" type="text" name="email" placeholder="Email Adress" required>
+        </div>
+        <div>
+            <label for="">password</label>
+            <input class="form-control" type="password" name="password" id="" placeholder="Password" required>
+        </div>
+        <div class="mt-3">
+            <% if(typeof alert != 'undefined') { %>
+                <% alert.forEach(function(error) { %>
+                    <div class="alert alert-danger fade show" role="alert"><%= error.msg %></div>
+                <% }) %>
+            <% } %>  
+        </div>
+        
+        <div class="mt-3">
+            <button class="btn btn-lg btn-primary btn-block">login</button>
+        </div>
+        
+    </form>
+    
+</div>
+<a href="/users/register">Register</a>
+</div>
+
+
+<%- include('../templates/footer') %> 

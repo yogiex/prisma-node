@@ -1,0 +1,34 @@
+<h2>payment </h2>
+
+<form action="/dashboard/payment" method="post">
+    <input type="text" name="orderId" value="<%- data.id %>" readonly>
+    <label for="">Atas Nama</label>
+    <input type="text" value="<%- data.pemesan %>">
+
+    <label for="">Total</label>
+    <input type="text" value="<%- data.price %>" id="total">
+
+    <label for="">Uang</label>
+    <input type="text" name="bayar" id="uang">
+
+    <label for="">Kembalian</label>
+    <input name="" id="kembalian" readonly disabled>
+
+    <button>Bayar!</button>
+    
+</form>
+
+<button onclick="itungan()">Calculate</button>
+
+<script>
+    function itungan(){
+        console.log('tes')
+        let totalPrice = document.getElementById('total')
+        let uang = document.getElementById('uang')
+        let jujul = document.getElementById('kembalian')
+
+        let uangKembalian = Number(uang.value) - Number(totalPrice.value)
+        document.getElementById('kembalian').value = uangKembalian
+        console.log(jujul,uang,totalPrice, uangKembalian)
+    }
+</script>

@@ -1,0 +1,40 @@
+<%- include('./layouts/topDashboard'); %>
+
+<h3>content page user</h3>
+<a href="user/add">
+    <i class="fas fa-plus-square fa-2x d-flex justify-content-end"  >  </i>
+</a>
+
+
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <!-- <th>ID</th> -->
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <% for(let i=0;i<allUser.length;i++) { %>
+        <tr>
+            <!-- <td><%= allUser[i].id %></td> -->
+            <td><%= allUser[i].name %></td>
+            <td> <%= allUser[i].email %> </td>
+            <td> <%= allUser[i].role %> </td>
+            <td>
+                <button class="btn btn-light btn-sm" onclick="editUser('<%= allUser[i].id %>')" > Edit </button>
+                <button class="btn btn-danger btn-sm" onclick="removeUser(`<%= allUser[i].id %>`)" > Remove </button>
+                
+            </td>
+          </tr>
+    <% } %>
+
+</table>
+
+
+<%- include('./layouts/footerDashboard'); %>
+
+<!-- dev only -->
+<!-- Button trigger modal -->
